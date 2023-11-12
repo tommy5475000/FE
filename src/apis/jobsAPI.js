@@ -1,5 +1,6 @@
 import fetcher from "./fetcher";
 
+//LẤY MENU
 export async function getMenuJobs() {
   try {
     const response = await fetcher.get("/cong-viec/lay-menu-loai-cong-viec");
@@ -9,84 +10,52 @@ export async function getMenuJobs() {
   }
 }
 
-export async function getDetailsJobs(jobId) {
-  try {
-    const response = await fetcher.get(
-      "/cong-viec/lay-cong-viec-theo-chi-tiet-loai/",
-      {
-        params: {
-          MaChiTietLoai: jobId,
-        },
-      }
-    );
-    return response.data.content;
-  } catch (error) {
-    throw error.response.data.content;
-  }
-}
-
-// LẤY DANH SÁCH CÔNG VIỆC THEO TÊN
-export async function getJobsByName(TenCongViec) {
-  try {
-    const response = await fetcher.get(
-      `/cong-viec/lay-danh-sach-cong-viec-theo-ten/${TenCongViec}`
-    );
-    return response.data.content;
-  } catch (error) {
-    throw error.response.data.content;
-  }
-}
-
 // LẤY CHI TIẾT LOẠI CÔNG VIỆC
-export async function getMenuByType(MaLoaiCongViec) {
+export async function getDetailsJobs(MaLoaiCongViec) {
   try {
     const response = await fetcher.get(
       `/cong-viec/lay-chi-tiet-loai-cong-viec/${MaLoaiCongViec}`
     );
-    return response.data.content;
+    return response.data?.content;
   } catch (error) {
-    throw error.response.data.content;
+    throw error.response.data?.content;
   }
 }
 
 // LẤY CÔNG VIỆC THEO CHI TIẾT LOẠI
-export async function getJobsByType(MaChiTietLoai) {
+export async function getJob(MaChiTietLoai) {
   try {
     const response = await fetcher.get(
       `/cong-viec/lay-cong-viec-theo-chi-tiet-loai/${MaChiTietLoai}`
     );
-    return response.data.content;
+    return response.data?.content;
   } catch (error) {
-    throw error.response.data.content;
+    throw error.response.data?.content;
+  }
+}
+
+// LẤY CÔNG VIỆC CHI TIẾT
+export async function getDetailJob(MaCongViec) {
+  try {
+    const response = await fetcher.get(
+      `/cong-viec/lay-cong-viec-chi-tiet/${MaCongViec}`
+    );
+    return response.data?.content;
+  } catch (error) {
+    throw error.response.data?.content;
+  }
+}
+
+// LẤY BÌNH LUẬN THEO MÃ CÔNG VIỆC
+export async function getCommentJob(MaCongViec) {
+  try {
+    const response = await fetcher.get(
+      `/binh-luan/lay-binh-luan-theo-cong-viec/${MaCongViec}`
+    );
+    return response.data?.content;
+  } catch (error) {
+    throw error.response.data?.content;
   }
 }
 
 
-// export async function getJob(job) {
-//   try {
-//     const response = await fetcher.get(
-//       "/cong-viec/lay-chi-tiet-loai-cong-viec/",
-//       {
-//         params: {
-//           MaLoaiCongViec: job,
-//         },
-//       }
-//     );
-//     return response.data?.content;
-//   } catch (error) {
-//     throw error.response.data?.content;
-//   }
-// }
-
-// export async function getJobs() {
-//     try {
-//         const response = await fetcher.get("/cong-viec/lay-danh-sach-cong-viec-theo-ten/", {
-//             params: {
-//                 TenCongViec: CongViec,
-//             }
-//         });
-//         return response.data.content
-//     } catch (error) {
-//         throw error.response.data.content
-//     }
-// };
